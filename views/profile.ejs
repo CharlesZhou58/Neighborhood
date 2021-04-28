@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body">
+                <h1 class="text-center mb-3">
+                    <i class="fas fa-user-plus"></i> Register
+                    <%- include('partials/messages.ejs') %>
+                    <form action="/users/updateProfile" method="POST">
+                        <div class="form-group">
+                            <label for="uid">username</label>
+                            <input type="text" id="uid" name="uid" class="form-control"
+                                value="<%= user %>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="address">address</label>
+                            <input type="text" id="address" name="address" class="form-control"
+                                placeholder="update address" value="<%= address %>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="city">city</label>
+                            <input type="text" id="city" name="city" class="form-control" placeholder="update city"
+                                value="<%= city %>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="state">state</label>
+                            <input type="text" id="state" name="state" class="form-control" placeholder="update state"
+                                value="<%= state %>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="introduction">introduction</label>
+                            <input type="text" id="introduction" name="introduction" class="form-control"
+                                placeholder="update introduction" value="<%= introduction %>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="family_info">family_info</label>
+                            <input type="text" id="family_info" name="family_info" class="form-control"
+                                placeholder="update family_info" value="<%= family_info %>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="photo_url">photo_url</label>
+                            <input type="text" id="photo_url" name="photo_url" class="form-control"
+                                placeholder="update photo_url" value="<%= photo_url %>" />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            edit
+                        </button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="/users/dashboard" class="btn btn-secondary">back</a>

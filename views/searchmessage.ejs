@@ -1,0 +1,14 @@
+<table class="table table-inverse">
+        <thead><h3 style="font-weight: bold">message list</h3>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < result.length; i++) { %>
+            <tr>
+                <td><%= result[i].author %></td>
+                <td><a href="/users/message?tid=<%= result[i].tid %>" id=<%= result[i].title %>
+                        class=""><%= result[i].title %></a></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+<a href="/users/dashboard" class="btn btn-success" style="margin-left: 10%;">back</a>

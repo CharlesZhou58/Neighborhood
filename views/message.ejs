@@ -1,0 +1,38 @@
+<a href="/users/dashboard" class="btn btn-success">back</a>
+<table class="table table-inverse">
+    <thead>
+        <h3 style="font-weight: bold"><%= messageDetail[0].title %></h3>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div style="font-weight: bold;"><%= messageDetail[0].author_id %></div></td>
+            <td><div style="font-weight: bold;padding-top: 20%;"><%= messageDetail[0].textbody %></div></td>
+            <td><div style="padding-top: 20%;"><%= messageDetail[0].posttime %></div></td>
+        </tr>
+        <% for(var i = 1; i < messageDetail.length; i++) { %>
+        <tr>
+            <td><%= messageDetail[i].author_id %></td>
+            <td><%= messageDetail[i].textbody %></td>
+            <td><%= messageDetail[i].posttime %></td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+<form action="/users/addreply" method="POST">
+    <div class="form-group">
+            <input type="text" id="title" name="title" class="form-control"
+                value="<%= messageDetail[0].title %>" hidden/>
+        </div>
+      <div class="form-group">  
+      <label for="">reply</label>
+      <textarea rows="4" cols="50"
+        
+        id="textbody"
+        name="textbody"
+        class="form-control"
+        placeholder="Enter messeage"
+      >
+      </textarea>
+      </div>
+    <button type="submit" class="btn btn-primary btn-block">reply</button>
+  </form>

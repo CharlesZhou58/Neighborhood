@@ -1,0 +1,247 @@
+<!-- As a heading -->
+<div style="background-color: whitesmoke ">
+<nav class="navbar " style="background-color:lightgray">
+    <span class="navbar-brand mb-0 h1">Neighborhood.com</span>
+</nav>
+
+<div style="margin: 5%; ">
+
+    <form action="/users/addbid" method="POST" id="bidform">
+        <div class="form-group">
+
+            <select name="bid" id="volume" width="30%" form="bidform">
+                <% for ( var i = 0; i < bids.length; i++ ){ %>
+                <option value="<%= bids[i].bid%>"><%= blockname[i].block_name%></option>
+                <% } %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="width: 30%;margin-bottom:5%;">
+            apply ur bid
+        </button>
+    </form>
+    <div hidden>
+        <a href="/users/map" class="btn btn-secondary">map</a>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-2">
+            <img id="userImage" src="<%= photo_url%>" width="150px" height="150px">
+            <h3 hidden id="mybid"><%= mybid %></h3>
+            <div style="font-weight: bold">username:</div>
+            <div style="padding-left:10%"><%= user %></div>
+            <div style="font-weight: bold">address:</div>
+            <div style="padding-left:10%"><%= address %></div>
+            <div style="font-weight: bold">city:</div>
+            <div style="padding-left:10%"><%= city %></div>
+            <div style="font-weight: bold">state:</div>
+            <div style="padding-left:10%"><%= state %></div>
+            <div style="font-weight: bold">introduction:</div>
+            <div style="padding-left:10%"><%= introduction %></div>
+            <div style="font-weight: bold">family_info:</div>
+            <div style="padding-left:10%"><%= family_info %></div>
+            <div style="font-weight: bold">block:</div>
+            <div style="padding-left:10%"><%= blockname1 %></div>
+            <div style="font-weight: bold">hood:</div>
+            <div style="padding-left:10%"><%= hood %></div>
+
+            <div >
+                <a href="/users/profile" class="btn  btn-success" style="width: 100%;margin-bottom: 5%;">edit
+                    profile</a>
+            </div>
+            <div >
+                    <a href="/users/leaveblock" class="btn  btn-warning" style="width: 100%;margin-bottom: 5%;">leaveblock</a>
+                </div>
+            <div>
+                <a href="/users/login" class="btn btn-danger" style="width: 100%;margin-bottom: 5%;">Logout</a>
+            </div>
+        </div>
+        <div class="col-sm-6">
+                <form action="/users/searchmessage" method="POST">
+                <div class="form-group">
+                        
+                        <input
+                          type="text"
+                          id="searchtext"
+                          name="searchtext"
+                          class="form-control"
+                          placeholder="search keyword"
+                        />
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-block">
+                            search messages
+                          </button>
+            </form>
+            <a href="/users/poster" class="btn btn-success" style="width: 100%; margin-top:5%;margin-bottom:5%;">post a thread</a>
+            <table class="table table-inverse">
+                    <thead><h3 style="font-weight: bold">unread thread list</h3>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < unreadtopic.length; i++) { %>
+                        <tr>
+                            <td><%= unreadtopic[i].author_id %></td>
+                            <td><a href="/users/message?tid=<%= unreadtopic[i].tid %>" id=<%= unreadtopic[i].title %>
+                                    class=""><%= unreadtopic[i].title %></a></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+            <table class="table table-inverse">
+                    <thead><h3 style="font-weight: bold">thread list</h3>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < topic.length; i++) { %>
+                        <tr>
+                            <td><%= topic[i].author_id %></td>
+                            <td><a href="/users/message?tid=<%= topic[i].tid %>" id=<%= topic[i].title %>
+                                    class=""><%= topic[i].title %></a></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+        </div>
+        <div class="col-sm-4">
+            
+            <div id="floating-panel">
+                    <% for(var i = 0; i < usersAddress.length; i++) { %>
+                    <input class="address" type="textbox" value="<%= usersAddress[i].address %>,<%= city %>,<%= state %>" hidden>
+                    <% } %>
+                  </div>
+            <div id="map" style="width:100%;height: 400px;"></div>
+            <table class="table table-inverse">
+                <thead ><h3 style="font-weight: bold">pending application</div>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i < applyJoinBlock.length; i++) { %>
+                    <tr>
+                        <td>
+                            <form action="/users/acceptbid" method="post">
+                                <button name="applier" value=<%= applyJoinBlock[i].uid %>
+                                    class="btn btn-warning">agree
+                                    <%= applyJoinBlock[i].uid %> to ur block?</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <% for(var i = 0; i < friendrequestlist1.length; i++) { %>
+                    <tr>
+
+                        <td><a href="/users/friendpage?name=<%= friendrequestlist1[i].uid2 %>"
+                                id=<%= friendrequestlist1[i].uid2 %>
+                                class="btn btn-danger"><%= friendrequestlist1[i].uid2 %> wants to add u</a>
+
+                        </td>
+                    </tr>
+                    <% } %>
+                    <% for(var i = 0; i < friendrequestlist2.length; i++) { %>
+                    <tr>
+
+                        <td><a href="/users/friendpage?name=<%= friendrequestlist2[i].uid1 %>"
+                                id=<%= friendrequestlist2[i].uid1 %>
+                                class="btn btn-danger"><%= friendrequestlist2[i].uid1 %> wants to add u</a>
+
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="table table-inverse">
+                <thead><h3 style="font-weight: bold">friend list</h3>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i < friendlist.length; i++) { %>
+                    <tr>
+                        <td><a href="/users/friendpage?name=<%= friendlist[i].uid2 %>" id=<%= friendlist[i].uid2 %>
+                                class=""><%= friendlist[i].uid2 %></a></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="table table-inverse">
+                <thead><h3 style="font-weight: bold">neighbor list</h3>
+                </thead>
+                <tbody>
+                    <% for(var i=0; i < neighbor.length; i++) { %>
+                    <tr>
+                        <td><a href="/users/friendpage?name=<%= neighbor[i].uid2 %>" id=<%= neighbor[i].uid2 %>
+                                class=""><%= neighbor[i].uid2 %></a></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+
+            </table>
+            <table class="table table-inverse">
+                <thead><h3 style="font-weight: bold">people in ur block</h3>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="recommendlist"> add bid first</td>
+                    </tr>
+                    <% for(var i = 0; i < recommendlist.length; i++) { %>
+                    <tr>
+                        <td><a href="/users/friendpage?name=<%= recommendlist[i].uid %>" id=<%= recommendlist[i].uid %>
+                                class="btn btn-info" style="width:80%"><%= recommendlist[i].uid %></a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe0fCsEMIVXq6XvfO1AesgChOdY2zdPfQ&callback=initMap"
+    ></script>
+<script>
+
+    $(document).ready(function () {
+        if ($('#mybid').text().length == 1) {
+            $('#bidform').hide();
+            //console.log($('#recommendlist').text());
+            $('#recommendlist').hide();
+        }
+        else {
+            console.log($('#recommendlist').text());
+            $('#recommendlist').show();
+        }
+        if ($('#userImage').attr('src') == "unknown") {
+
+            $("#userImage").attr("src", "/member.jpg");
+        };
+
+
+
+    });
+    function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: {lat: 40.649, lng: -73.949}
+  });
+  var geocoder = new google.maps.Geocoder();
+  var arr = $.map($('.address'), function (el) { return el.value; });
+    for(let i = 0 ; i < arr.length; i++){
+        geocodeAddress(geocoder, map,arr[i]);
+    }
+    
+  
+}
+
+function geocodeAddress(geocoder, resultsMap,address) {
+  
+  console.log(address);
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+</script>

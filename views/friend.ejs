@@ -1,0 +1,94 @@
+<div style="background-color: whitesmoke ">
+        <nav class="navbar " style="background-color:lightgray">
+            <span class="navbar-brand mb-0 h1">Neighborhood.com</span>
+        </nav>
+<div style="margin: 5%;">
+        <div class="row">
+                <div class="col-sm-4">    
+        <a href="/users/dashboard" class="btn btn-success">back</a>
+        </div>
+        <div class="col-sm-4">  
+<form action="/users/addfriend" method="post">
+    <div class="form-group">
+        <input name="user" value=<%= user %> hidden></input>
+    </div>
+    <div class="form-group">
+        <button id="fstatus"  name="applier" value="<%= friendstatus%>"
+            class="btn btn-secondary"><%= friendstatus%></button>
+    </div>
+
+
+</form></div>
+
+<div class="col-sm-4">  
+<form action="/users/addneighbor" method="post">
+    <div class="form-group">
+        <input name="user" value=<%= user %> hidden></input>
+    </div>
+    <div class="form-group">
+        <button type="submit" name="applier" 
+            class="btn btn-secondary" ><%= neighborStatus%></button>
+    </div>
+
+
+</form>
+</div>
+        </div>
+<div class="row">
+    <div class="col-sm-4">
+        <img id="userImage" src="<%= photo_url%>" width="150px" height="150px">
+        
+           
+            
+        
+    </div>
+    <div class="col-sm-6">
+            <div style="font-weight: bold">username:</div>
+            <div style="padding-left:10%"><%= user %></div>
+            <div style="font-weight: bold">address:</div>
+            <div style="padding-left:10%"><%= address %></div>
+            <div style="font-weight: bold">city:</div>
+            <div style="padding-left:10%"><%= city %></div>
+            <div style="font-weight: bold">state:</div>
+            <div style="padding-left:10%"><%= state %></div>
+            <div style="font-weight: bold">introduction:</div>
+            <div style="padding-left:10%"><%= introduction %></div>
+            <div style="font-weight: bold">family_info:</div>
+            <div style="padding-left:10%"><%= family_info %></div>
+    </div>
+</div>
+
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        console.log($('#fstatus').text());
+        if ($('#fstatus').text() == "add friend") {
+            $("#fstatus").click(function () {
+                $('#fstatus').html('sent request');
+            });
+        }
+        if ($('#fstatus').text() == "confirm request") {
+            $("#fstatus").click(function () {
+                $('#fstatus').html('friend');
+            });
+        }
+        if ($('#fstatus').text() == "sent request" || $('#fstatus').text() == "friend") {
+            $("#fstatus").attr("disabled", true);
+        }
+        if ($('.nstatus').text() == "add neighbor") {
+            $(".nstatus").click(function () {
+                
+                $('.nstatus').attr("disabled", true);
+            });
+        }
+        else{
+
+            $('.nstatus').attr("disabled", true);
+        }
+        if ($('#userImage').attr('src') == "unknown") {
+
+            $("#userImage").attr("src", "/member.jpg");
+        };
+    });
+</script>
